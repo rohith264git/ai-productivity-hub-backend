@@ -1,6 +1,10 @@
 import express from "express";
 import cors from "cors";
 import taskRoutes from "./routes/task-routes";
+import dotenv from "dotenv";
+import connectDB from "./config/db";
+
+dotenv.config();
 
 const app = express();
 const PORT = 3000;
@@ -14,6 +18,12 @@ app.get("/", (req, res) => {
 
 app.use("/api", taskRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const startServer = async () => {
+  await connectDB();
+
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+};
+
+startServer();
