@@ -3,6 +3,7 @@ import cors from "cors";
 import taskRoutes from "./routes/task-routes";
 import dotenv from "dotenv";
 import connectDB from "./config/db";
+import authRoutes from "./routes/auth-routes";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api", taskRoutes);
+app.use("/api/auth", authRoutes);
 
 const startServer = async () => {
   await connectDB();
