@@ -1,11 +1,10 @@
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import taskRoutes from "./routes/task-routes";
-import dotenv from "dotenv";
 import connectDB from "./config/db";
 import authRoutes from "./routes/auth-routes";
-
-dotenv.config();
+import aiRoutes from "./routes/ai-routes";
 
 const app = express();
 const PORT = 3000;
@@ -19,6 +18,7 @@ app.get("/", (req, res) => {
 
 app.use("/api", taskRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/ai", aiRoutes);
 
 const startServer = async () => {
   await connectDB();
